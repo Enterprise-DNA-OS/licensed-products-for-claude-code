@@ -1,3 +1,7 @@
+---
+description: "Find licences expiring within sixty days."
+---
+
 # /renewals-due
 
 Find licences expiring within sixty days.

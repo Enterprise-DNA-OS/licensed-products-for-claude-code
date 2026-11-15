@@ -1,3 +1,7 @@
+---
+description: "Freeze a reconciled period under a different reviewer."
+---
+
 # /close-period
 
 Freeze a reconciled period under a different reviewer.

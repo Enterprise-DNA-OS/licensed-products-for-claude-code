@@ -1,3 +1,7 @@
+---
+description: "Record a dated product approval from evidence."
+---
+
 # /approve-product
 
 Record a dated product approval from evidence.

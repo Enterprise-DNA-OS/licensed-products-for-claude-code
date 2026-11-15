@@ -1,3 +1,7 @@
+---
+description: "Register a product under one agreement."
+---
+
 # /add-product
 
 Register a product under one agreement.

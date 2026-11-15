@@ -1,3 +1,7 @@
+---
+description: "Find sales outside the licence or without approval."
+---
+
 # /sales-exceptions
 
 Find sales outside the licence or without approval.

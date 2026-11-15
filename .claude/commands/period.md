@@ -1,3 +1,7 @@
+---
+description: "Read one period, sales and frozen review snapshot."
+---
+
 # /period
 
 Read one period, sales and frozen review snapshot.

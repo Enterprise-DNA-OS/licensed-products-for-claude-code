@@ -1,3 +1,7 @@
+---
+description: "Enter signed licence terms from evidence."
+---
+
 # /add-agreement
 
 Enter signed licence terms from evidence.

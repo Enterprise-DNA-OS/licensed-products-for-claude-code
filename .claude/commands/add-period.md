@@ -1,3 +1,7 @@
+---
+description: "Open a non-overlapping reporting period."
+---
+
 # /add-period
 
 Open a non-overlapping reporting period.

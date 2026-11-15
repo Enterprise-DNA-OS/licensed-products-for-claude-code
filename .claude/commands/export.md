@@ -1,3 +1,7 @@
+---
+description: "Write a complete private snapshot without overwriting files."
+---
+
 # /export
 
 Write a complete private snapshot without overwriting files.

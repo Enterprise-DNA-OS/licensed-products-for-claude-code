@@ -1,3 +1,7 @@
+---
+description: "Draft one royalty working statement; never send."
+---
+
 # /draft-statement
 
 Draft one royalty working statement; never send.

@@ -1,3 +1,7 @@
+---
+description: "Read supported commands and flags."
+---
+
 # /help
 
 Read supported commands and flags.

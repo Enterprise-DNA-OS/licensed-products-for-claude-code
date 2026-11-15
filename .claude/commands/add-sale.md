@@ -1,3 +1,7 @@
+---
+description: "Record an evidenced sales line."
+---
+
 # /add-sale
 
 Record an evidenced sales line.

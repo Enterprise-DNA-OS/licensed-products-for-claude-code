@@ -1,3 +1,7 @@
+---
+description: "Read one agreement, products, periods and follow-ups."
+---
+
 # /agreement
 
 Read one agreement, products, periods and follow-ups.

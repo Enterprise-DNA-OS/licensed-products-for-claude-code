@@ -1,3 +1,7 @@
+---
+description: "Read licence terms and owners."
+---
+
 # /agreements
 
 Read licence terms and owners.

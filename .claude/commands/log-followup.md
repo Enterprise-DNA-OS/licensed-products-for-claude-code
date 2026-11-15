@@ -1,3 +1,7 @@
+---
+description: "Record an action with an owner and due date."
+---
+
 # /log-followup
 
 Record an action with an owner and due date.

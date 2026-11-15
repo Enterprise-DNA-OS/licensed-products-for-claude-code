@@ -1,3 +1,7 @@
+---
+description: "Record the actual outcome of an action."
+---
+
 # /close-followup
 
 Record the actual outcome of an action.

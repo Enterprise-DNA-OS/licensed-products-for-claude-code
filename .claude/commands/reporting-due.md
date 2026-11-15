@@ -1,3 +1,7 @@
+---
+description: "Find upcoming and overdue royalty statements."
+---
+
 # /reporting-due
 
 Find upcoming and overdue royalty statements.

@@ -1,3 +1,7 @@
+---
+description: "Read unearned minimums and earned royalties above advances."
+---
+
 # /guarantee-exposure
 
 Read unearned minimums and earned royalties above advances.

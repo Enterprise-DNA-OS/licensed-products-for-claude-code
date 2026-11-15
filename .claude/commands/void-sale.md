@@ -1,3 +1,7 @@
+---
+description: "Void an incorrect open-period sale while preserving its history."
+---
+
 # /void-sale
 
 Void an incorrect open-period sale while preserving its history.

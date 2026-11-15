@@ -1,3 +1,7 @@
+---
+description: "Check contract evidence and NZ record-review metadata."
+---
+
 # /compliance
 
 Check contract evidence and NZ record-review metadata.

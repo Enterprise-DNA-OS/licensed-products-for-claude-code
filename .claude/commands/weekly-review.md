@@ -1,3 +1,7 @@
+---
+description: "Draft Monday review from deadlines, exceptions and overdue actions."
+---
+
 # /weekly-review
 
 Draft Monday review from deadlines, exceptions and overdue actions.

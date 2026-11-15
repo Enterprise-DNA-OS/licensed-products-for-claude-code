@@ -1,3 +1,7 @@
+---
+description: "Read the change history."
+---
+
 # /activity
 
 Read the change history.

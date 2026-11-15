@@ -1,3 +1,7 @@
+---
+description: "Find products without dated approval."
+---
+
 # /approvals-due
 
 Find products without dated approval.

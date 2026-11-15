@@ -1,3 +1,7 @@
+---
+description: "Validate and import explicitly mapped LicenSee source sales."
+---
+
 # /import
 
 Validate and import explicitly mapped LicenSee source sales.

@@ -1,3 +1,7 @@
+---
+description: "Read earned royalties and excluded sale counts."
+---
+
 # /royalty-review
 
 Read earned royalties and excluded sale counts.

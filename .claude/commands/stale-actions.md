@@ -1,3 +1,7 @@
+---
+description: "Find overdue follow-ups and their owners."
+---
+
 # /stale-actions
 
 Find overdue follow-ups and their owners.
