@@ -1,43 +1,54 @@
-# Licensed Products for Claude Code: operating instructions
+# Licensed Products for Claude Code
 
-This file is the brain. Claude Code reads it at the start of every session. It says who this is for, how work gets done, and the one right way to do each recurring job.
+A working desk for licensed consumer products: agreements, product approvals, sales validation and royalty reporting. Read the database before answering.
 
-## Who this is for
+## Rules
 
-- **Business:** [YOUR BUSINESS]
-- **Operator:** [YOUR NAME], [your role]
-- **What matters most:** [the one or two outcomes you care about]
+Ask for the intended business and actor when unknown. All commands use npm run licensing -- <command>, support --json and list flags through help. Money input is integer cents, rates are integer basis points, dates are ISO YYYY-MM-DD and days use UTC. Human output amounts are currency units.
 
-Fill this in once. A worker with context knows. A worker without it guesses.
+Never send, submit statements, grant rights, process payments or write to another system. Drafts stay in drafts/ and are returned in chat. Product approval and period review require actual evidence and an operator instruction. Do not treat a generated draft as approved.
 
-## How to work
+This is a trusted local operator tool, not a multi-tenant service. Actor labels are not logins. Protect the OS, database, exports and reports. Do not seed a real database. No credentials, source imports or business records in git.
 
-1. **Take a brief, not a script.** The operator describes the outcome. You run the right command and present the answer.
-2. **Read before you write.** Before drafting anything about a record, read its full history first.
-3. **Plain language.** Short sentences. No filler. Numbers in tables.
-4. **Silent success, loud problems.** No play-by-play. Say what broke and what you did about it.
-5. **Stop at the line.** Anything that sends, deletes, or faces a customer waits for a yes in this session.
+Read docs/compliance.md before interpreting a finding. The base supports fixed rates and simple net sales only; do not apply unsupported terms. Guarantee exposure is not an amount to pay. Read docs/replace-fadel-licensee.md before import.
 
-## Routing table: one right way for each recurring job
+## One route per job
 
-| When the operator asks for... | Use this |
+| Command | Job |
 |---|---|
-| <!-- TODO(author): one row per slash command --> | `/...` |
+| /agreements | Read licence terms and owners. |
+| /products | Read product approval evidence. |
+| /reporting-due | Find upcoming and overdue royalty statements. |
+| /sales-exceptions | Find sales outside the licence or without approval. |
+| /royalty-review | Read earned royalties and excluded sale counts. |
+| /guarantee-exposure | Read unearned minimums and earned royalties above advances. |
+| /approvals-due | Find products without dated approval. |
+| /renewals-due | Find licences expiring within sixty days. |
+| /stale-actions | Find overdue follow-ups and their owners. |
+| /compliance | Check contract evidence and NZ record-review metadata. |
+| /activity | Read the change history. |
+| /help | Read supported commands and flags. |
+| /agreement | Read one agreement, products, periods and follow-ups. |
+| /period | Read one period, sales and frozen review snapshot. |
+| /add-agreement | Enter signed licence terms from evidence. |
+| /add-product | Register a product under one agreement. |
+| /approve-product | Record a dated product approval from evidence. |
+| /add-period | Open a non-overlapping reporting period. |
+| /add-sale | Record an evidenced sales line. |
+| /void-sale | Void an incorrect open-period sale while preserving its history. |
+| /close-period | Freeze a reconciled period under a different reviewer. |
+| /log-followup | Record an action with an owner and due date. |
+| /close-followup | Record the actual outcome of an action. |
+| /review-records | Record tax retention dates and the next purpose review. |
+| /import | Validate and import explicitly mapped LicenSee source sales. |
+| /export | Write a complete private snapshot without overwriting files. |
+| /weekly-review | Draft Monday review from deadlines, exceptions and overdue actions. |
+| /draft-statement | Draft one royalty working statement; never send. |
+| /customise | Make a tested field or rule change. |
+| /new-view | Add a branded read-only report. |
 
-If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) and then propose a new command for it.
+## Files
 
-## Hard rules
+scripts/licensing.mjs is the CLI. supabase/migrations contains numbered migrations. DATABASE_URL chooses PostgreSQL; otherwise DATA_DIR uses embedded PGlite. brand.json, views.json and documents.json define private HTML reports. Every mutation has an activity record; closed periods retain frozen snapshots. Use partial ids or case-insensitive codes and names; ambiguity lists candidates and exits 1.
 
-- Never send email or messages from here. Draft to `drafts/`, a person sends.
-- Never delete records without an explicit yes in this session. Prefer marking closed or archived.
-- Never invent a record. If a name is ambiguous, list the candidates and ask.
-- The database is the source of truth. If the answer is not in it, say so.
-
-## Where things live
-
-- `scripts/` the CLI. `scripts/lib/db.mjs` picks `DATABASE_URL` (Postgres, Supabase) or the embedded database in `.data/`.
-- `supabase/migrations/` the schema, plain SQL. `npm run migrate` applies it.
-- `.claude/commands/` the slash commands. Add one every time the same ask comes twice.
-- `docs/` the thesis and the guide for moving off FADEL LicenSee.
-
-Built by Enterprise DNA. Installed and run for you as part of Omni: https://enterprisedna.co/omni/instead-of/fadel-licensee
+Run npm test after domain changes. Never edit an applied migration. Back up before customisation. Omni by Enterprise DNA can build and run your version: https://enterprisedna.co/omni/book/?offer=replace-software&utm_campaign=fadel-licensee

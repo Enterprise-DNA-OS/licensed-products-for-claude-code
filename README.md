@@ -1,115 +1,120 @@
-<h1 align="center">Licensed Products for Claude Code</h1>
+# Licensed Products for Claude Code
 
-<p align="center">
-  <strong>The open-source licensed-product royalty desk that is just a database and Claude Code.</strong>
-</p>
+Keep licensed-product agreements, approved products, sales and royalty reviews in a database you own. Spot the sale outside its territory before it reaches a statement.
 
-<p align="center">
-  Created by <a href="https://www.enterprisedna.co"><strong>Enterprise DNA</strong></a>. Free and open source. Works with Claude Code, Codex, OpenCode or Cursor.
-</p>
+## Three ways to own it
 
-<!-- three-doors -->
-<table align="center">
-  <tr>
-    <td align="center"><strong>Do it yourself</strong><br/>Clone it, run it, own it. Free, MIT.<br/><a href="#quick-start">Quick start</a></td>
-    <td align="center"><strong>We customise it</strong><br/>Your fields, your rules, your FADEL LicenSee data brought across.<br/><a href="https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=fadel-licensee">Book a call</a></td>
-    <td align="center"><strong>We run it for you</strong><br/>Installed, connected and operated inside Omni. Setup fee, then a retainer.<br/><a href="https://enterprisedna.co/omni/instead-of/fadel-licensee?utm_source=github&utm_medium=readme&utm_campaign=fadel-licensee">How it works</a></td>
-  </tr>
-</table>
+- **Do it yourself:** free, MIT licensed. Run it with Claude Code, Codex, OpenCode or Cursor. Hosting and your agent subscription are separate costs.
+- **We customise it:** Enterprise DNA maps your FADEL LicenSee source records, adds your contract rules and statement layouts, and builds a web front end or uses a different stack when needed. One setup fee, then a retainer for ongoing work.
+- **We run it for you:** Omni by Enterprise DNA installs it, connects your systems, manages access and backups, and prepares the reporting cycle. One setup fee, then a retainer.
 
-<p align="center">
-  <a href="#what-is-this">What is this</a> &bull;
-  <a href="#why-no-front-end">Why no front end</a> &bull;
-  <a href="#quick-start">Quick start</a> &bull;
-  <a href="#the-commands">Commands</a> &bull;
-  <a href="#instead-of-fadel-licensee">Instead of FADEL LicenSee</a> &bull;
-  <a href="#want-it-installed-and-run-for-you">Installed for you</a> &bull;
-  <a href="#license">License</a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Node-20+-339933?style=flat-square" alt="Node 20+" />
-  <img src="https://img.shields.io/badge/PostgreSQL-any-336791?style=flat-square" alt="PostgreSQL" />
-  <img src="https://img.shields.io/badge/PGlite-embedded-3ecf8e?style=flat-square" alt="PGlite" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow?style=flat-square" alt="MIT License" />
-</p>
-
----
-
-## What is this
-
-Licensed Products for Claude Code does the job you pay FADEL LicenSee for, as a Postgres database and a set of agent commands. There is no web front end. You open the folder in [Claude Code](https://claude.com/claude-code) (or Codex, OpenCode, Cursor: see `AGENTS.md`) and ask for what you want in plain language. It runs the right query, and it can answer questions the FADEL LicenSee dashboard cannot.
-
-<!-- TODO(author): the annual bill. One sentence: what a 10 to 50 person business typically pays FADEL LicenSee per year, all in, with a source. -->
-
-Want the same thing with a web front end, or built on a different stack? That is a customisation, and it is exactly what Enterprise DNA does: [book a call](https://enterprisedna.co/omni/book/?utm_source=github&utm_medium=readme&utm_campaign=fadel-licensee).
-
-<!-- TODO(author): two or three sentences on what this specific product covers and who it is for. -->
-
-## Why no front end
-
-- The front end was only ever there because the database was hard to talk to. That is no longer true.
-- Your data sits in plain Postgres tables you own. Any tool can read them. No export, no lock-in.
-- No seats, no tiers, no add-ons. Read [docs/why-no-front-end.md](docs/why-no-front-end.md) for the honest trade-offs too.
+[Book a 30-minute call with Sam](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=fadel-licensee).
 
 ## Quick start
 
-Sixty seconds, no database install (an embedded Postgres runs inside Node):
+Node 20 or newer. No cloud account required.
 
-```bash
-git clone https://github.com/Enterprise-DNA-OS/licensed-products-for-claude-code.git
-cd licensed-products-for-claude-code
+```sh
 npm install
+npm test
 npm run demo
+npm run licensing -- sales-exceptions
+npm run licensing -- royalty-review --json
+npm run view
+npm run docs
 ```
 
-Then open the folder in Claude Code and type a slash command. <!-- TODO(author): name the first command to try. -->
+The synthetic demo includes an overdue reporting period, an out-of-territory sale, an unapproved product and a stale action. Reseeding preserves edits. Use an empty DATA_DIR for real data and never seed it. Set DATABASE_URL for a shared PostgreSQL database or leave it empty for local PGlite in .data/db.
 
-### Use it with your own Postgres or Supabase
+## What this base covers
 
-Copy `.env.example` to `.env`, set `DATABASE_URL`, then `npm run migrate`. Same commands, shared data, no per-seat fee.
+One agreement holds one property, country, product category, currency and flat royalty rate. Products have dated approval evidence. Reporting periods cannot overlap. Sales retain their source reference and original imported row. Gross less allowed deductions produces net sales; eligible lines earn the fixed percentage, rounded to cents per line. Currencies never aggregate together.
 
-## The commands
+Wrong-country, wrong-currency, out-of-term and unapproved-product sales appear as exceptions. They stay outside earned totals and block period closure. Closing requires a different named reviewer and reconciliation evidence, and freezes the statement snapshot. Open-period mistakes can be voided with a reason; records are never deleted. Original import files and activity are append-only.
 
-<!-- TODO(author): a table of the slash commands in .claude/commands and what each one does. -->
+Whole-term minimum exposure and earned royalties above a recorded advance are working comparisons, not payment amounts. No tiered rates, credit-note processing, tax, commission, currency conversion, settlement, licensor portal, vendor-specific statement layout or automatic payment is included. Add and test the relevant contract terms before relying on those calculations. Closed-period corrections need a reviewed amendment that preserves the original.
 
-| Command | What it does |
+[Research](docs/research.md) records the five-figure company-reported annual contract range and its limits. No NZ/AU customer invoice or local subscriber was verified. This is an independent implementation of the bounded workflow, not the full FADEL platform.
+
+## Commands
+
+| Command | Job |
 |---|---|
-| `/...` | ... |
+| /agreements | Read licence terms and owners. |
+| /products | Read product approval evidence. |
+| /reporting-due | Find upcoming and overdue royalty statements. |
+| /sales-exceptions | Find sales outside the licence or without approval. |
+| /royalty-review | Read earned royalties and excluded sale counts. |
+| /guarantee-exposure | Read unearned minimums and earned royalties above advances. |
+| /approvals-due | Find products without dated approval. |
+| /renewals-due | Find licences expiring within sixty days. |
+| /stale-actions | Find overdue follow-ups and their owners. |
+| /compliance | Check contract evidence and NZ record-review metadata. |
+| /activity | Read the change history. |
+| /help | Read supported commands and flags. |
+| /agreement | Read one agreement, products, periods and follow-ups. |
+| /period | Read one period, sales and frozen review snapshot. |
+| /add-agreement | Enter signed licence terms from evidence. |
+| /add-product | Register a product under one agreement. |
+| /approve-product | Record a dated product approval from evidence. |
+| /add-period | Open a non-overlapping reporting period. |
+| /add-sale | Record an evidenced sales line. |
+| /void-sale | Void an incorrect open-period sale while preserving its history. |
+| /close-period | Freeze a reconciled period under a different reviewer. |
+| /log-followup | Record an action with an owner and due date. |
+| /close-followup | Record the actual outcome of an action. |
+| /review-records | Record tax retention dates and the next purpose review. |
+| /import | Validate and import explicitly mapped LicenSee source sales. |
+| /export | Write a complete private snapshot without overwriting files. |
+| /weekly-review | Draft Monday review from deadlines, exceptions and overdue actions. |
+| /draft-statement | Draft one royalty working statement; never send. |
+| /customise | Make a tested field or rule change. |
+| /new-view | Add a branded read-only report. |
 
-## Instead of FADEL LicenSee
+28 executable CLI commands and 30 slash commands. All CLI commands support --json. Flags use --name=value. Exact codes take precedence; partial ids and case-insensitive names work, and ambiguous matches list candidates and exit 1.
 
-<!-- TODO(author): how to bring data across from FADEL LicenSee; link docs/replace-fadel-licensee.md -->
+## Ten questions your own records answer
 
-## Architecture
+1. Which reporting periods are overdue and still contain exceptions?
+2. Which sales were made outside the licensed territory?
+3. Which products were sold before their approval date?
+4. Which sales use a different currency from the agreement?
+5. How much eligible royalty has each period earned?
+6. How much of each whole-term minimum remains unearned?
+7. Which licences expire in the next sixty days?
+8. Which follow-ups are overdue and who owns them?
+9. Which licence records need a retention or purpose review?
+10. Which sales and evidence supported a closed statement?
 
-```
-licensed-products-for-claude-code/
-  CLAUDE.md                 how the operator wants this run (routing table + house rules)
-  AGENTS.md                 the same, for Codex / OpenCode / Cursor / Gemini CLI
-  .claude/commands/         the slash commands
-  scripts/                  the CLI the commands drive
-  scripts/lib/db.mjs        one adapter: DATABASE_URL (pg) or embedded PGlite
-  supabase/migrations/      plain SQL schema
-  supabase/seed.sql         demo data
-  docs/                     the thesis and the migration guide
-```
+These are demonstrated queries, not a claim that FADEL cannot answer them. Your own joins, policy and evidence remain available to change.
 
-## Built for coding agents
+## Your first hour: ten things to ask for
 
-The database, CLI and command recipes work with Claude Code, Codex, OpenCode or Cursor. Ask your coding agent for a new command and have it implement and test the change against the same records.
+1. Put our name, colours and logo in brand.json.
+2. Show overdue reporting periods.
+3. Explain each excluded sales line.
+4. Show products still waiting for approval evidence.
+5. Show unearned minimums without mixing currencies.
+6. Draft the Monday review from deadlines, exceptions and actions.
+7. Draft a royalty working statement for one period.
+8. Test our source-sales mapping and reconcile every total.
+9. Add our contract manager field with a tested migration.
+10. Export a private snapshot before changing a rule.
 
-## Contributing
+## Bring your history
 
-Issues and pull requests are welcome. Keep the shape: plain SQL, a small CLI, a slash command per recurring job, no front end.
+[The replace guide](docs/replace-fadel-licensee.md) covers mapping your source sales worksheet, recording signed terms, validating and importing with one command, and reconciling the result. There is no published full-account export schema in the vendor material reviewed. The synthetic fixture is our accepted mapping contract. Extra columns and the original CSV remain in the database. Duplicate files do nothing; duplicate references in changed files fail atomically.
 
-## Want it installed and run for you?
+## Documents, views and operations
 
-Enterprise DNA installs Licensed Products for Claude Code for your business, migrates your FADEL LicenSee data, connects it to the rest of your tools, and runs it for you as part of **Omni**, our managed Command Center. One setup fee, then a monthly retainer.
+brand.json controls the business name, logo and colours. npm run view renders the week, licence exposure and evidence review. npm run docs renders licence briefs, royalty working statements and evidence checklists as private HTML. These are drafts and working records, not official licensor submissions. [Why no front end](docs/why-no-front-end.md) explains mobile, portal and shared-editing limits.
 
-- Book a call: [enterprisedna.co/omni/book](https://enterprisedna.co/omni/book/?offer=replace-software&utm_source=github&utm_medium=readme&utm_campaign=fadel-licensee)
-- Read more: [enterprisedna.co/omni/instead-of/fadel-licensee](https://enterprisedna.co/omni/instead-of/fadel-licensee?utm_source=github&utm_medium=readme&utm_campaign=fadel-licensee)
+[Compliance](docs/compliance.md) links the NZ record-keeping and privacy sources and explains contract checks. Checks identify review work; they do not certify legal compliance. The Australian record policy requires configuration.
 
-## License
+All domain tables have row-level security enabled and PUBLIC privileges revoked. The connection is a trusted owner, and actor names are labels rather than authentication. Database owners can bypass controls. Use OS and database permissions and native backups. JSON export includes all domain records, imports, activity and frozen statements; restore is a reviewed maintenance task.
 
-MIT. Copyright (c) 2026 Enterprise DNA.
+npm test uses a temporary database and output directory, exercises every command, validates money arithmetic and guards, tests atomic imports, snapshots, HTML escaping and ambiguity. CI is configured for Windows and Ubuntu on Node 20 and 22 and PostgreSQL 16. Observed results are recorded separately; configuration alone is not a passing run. TEST_DATABASE_URL must point to an empty disposable database.
+
+## Licence
+
+MIT. Copyright 2026 Enterprise DNA. FADEL and LicenSee belong to their owners. No vendor code or assets are included.

@@ -1,0 +1,3 @@
+Product,Reference,Sale Date,Territory,Currency,Gross Cents,Deductions Cents,Evidence,Custom Detail
+TEST-CUP,IMPORT-001/1,2026-01-10,NZ,NZD,12500,500,Synthetic sales workbook,"Keep this, including comma"
+TEST-CUP,IMPORT-002/1,2026-01-11,NZ,NZD,5000,0,Synthetic sales workbook,Second row
