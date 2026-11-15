@@ -1,5 +1,59 @@
 [
- {"name":"licence-brief","title":"Licence working brief","for_each":"SELECT id,code FROM agreements ORDER BY code","file":"code","sections":[{"title":"Signed terms entered by the operator","layout":"record","sql":"SELECT code,name,licensor,property,territory,category,currency,starts_on,ends_on,rate_bps,minimum_cents,advance_cents,evidence FROM agreements WHERE id=$1"},{"title":"Product approvals","sql":"SELECT code,name,approved_on,approval_evidence FROM products WHERE agreement_id=$1 ORDER BY code"}]},
- {"name":"royalty-working-statement","title":"Royalty working statement, internal draft","for_each":"SELECT id,code FROM periods ORDER BY code","file":"code","sections":[{"title":"Current reporting position","note":"Fixed net-sales royalty, rounded per line. Minimum guarantees, recoupment, tax and payment amounts require contract review. Closed statement evidence is in the frozen record below.","layout":"record","sql":"SELECT code,agreement,currency,starts_on,ends_on,due_on,status,sale_count,exception_count,eligible_net_cents,earned_cents FROM period_position WHERE id=$1"},{"title":"Sales working detail","sql":"SELECT reference,product,territory,currency,net_cents,royalty_cents,issue FROM sale_review WHERE period_id=$1 ORDER BY reference"},{"title":"Review record and frozen snapshot","layout":"record","sql":"SELECT closed_at,reviewer,reconciliation,snapshot FROM periods WHERE id=$1"}]},
- {"name":"evidence-checklist","title":"Licence evidence checklist","for_each":"SELECT id,code FROM agreements ORDER BY code","file":"code","sections":[{"title":"Retention and purpose review","layout":"record","sql":"SELECT code,evidence,tax_year_end,retain_until,review_on FROM agreements WHERE id=$1"},{"title":"Open follow-ups","sql":"SELECT note,owner,due_on FROM followups WHERE agreement_id=$1 AND closed_at IS NULL ORDER BY due_on"}]}
+  {
+    "name": "licence-brief",
+    "title": "Licence working brief",
+    "for_each": "SELECT id,code FROM agreements ORDER BY code",
+    "file": "code",
+    "sections": [
+      {
+        "title": "Signed terms entered by the operator",
+        "layout": "record",
+        "sql": "SELECT code,name,licensor,property,territory,category,currency,starts_on,ends_on,rate_bps,minimum_cents,advance_cents,evidence FROM agreements WHERE id=$1"
+      },
+      {
+        "title": "Product approvals",
+        "sql": "SELECT code,name,approved_on,approval_evidence FROM products WHERE agreement_id=$1 ORDER BY code"
+      }
+    ]
+  },
+  {
+    "name": "royalty-working-statement",
+    "title": "Royalty working statement, internal draft",
+    "for_each": "SELECT id,code FROM periods ORDER BY code",
+    "file": "code",
+    "sections": [
+      {
+        "title": "Current reporting position",
+        "note": "Fixed net-sales royalty, rounded per line. Minimum guarantees, recoupment, tax and payment amounts require contract review. Closed statement evidence is in the frozen record below.",
+        "layout": "record",
+        "sql": "SELECT code,agreement,currency,starts_on,ends_on,due_on,status,sale_count,exception_count,eligible_net_cents,earned_cents FROM period_position WHERE id=$1"
+      },
+      {
+        "title": "Sales working detail",
+        "sql": "SELECT reference,product,territory,currency,net_cents,royalty_cents,issue FROM sale_review WHERE period_id=$1 AND NOT EXISTS(SELECT 1 FROM periods WHERE id=$1 AND closed_at IS NOT NULL) UNION ALL SELECT s.reference,s.product,s.territory,s.currency,s.net_cents,s.royalty_cents,s.issue FROM periods p CROSS JOIN LATERAL jsonb_to_recordset(p.snapshot->'sales') AS s(reference text,product text,territory text,currency text,net_cents bigint,royalty_cents bigint,issue text) WHERE p.id=$1 AND p.closed_at IS NOT NULL ORDER BY reference"
+      },
+      {
+        "title": "Review evidence",
+        "layout": "record",
+        "sql": "SELECT closed_at,reviewer,reconciliation FROM periods WHERE id=$1"
+      }
+    ]
+  },
+  {
+    "name": "evidence-checklist",
+    "title": "Licence evidence checklist",
+    "for_each": "SELECT id,code FROM agreements ORDER BY code",
+    "file": "code",
+    "sections": [
+      {
+        "title": "Retention and purpose review",
+        "layout": "record",
+        "sql": "SELECT code,evidence,tax_year_end,retain_until,review_on FROM agreements WHERE id=$1"
+      },
+      {
+        "title": "Open follow-ups",
+        "sql": "SELECT note,owner,due_on FROM followups WHERE agreement_id=$1 AND closed_at IS NULL ORDER BY due_on"
+      }
+    ]
+  }
 ]

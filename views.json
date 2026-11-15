@@ -1,5 +1,46 @@
 [
- {"name":"week","title":"Licensing desk this week","sections":[{"title":"Reporting deadlines","sql":"SELECT code,agreement,due_on,status,exception_count,currency,earned_cents FROM period_position WHERE closed_at IS NULL ORDER BY due_on"},{"title":"Sales to review","sql":"SELECT reference,agreement,product,issue FROM sale_review WHERE issue<>'' ORDER BY reference"},{"title":"Follow-ups","sql":"SELECT a.code,f.note,f.owner,f.due_on FROM followups f JOIN agreements a ON a.id=f.agreement_id WHERE f.closed_at IS NULL ORDER BY f.due_on"}]},
- {"name":"agreements","title":"Licence position","sections":[{"title":"Guarantee exposure, not a payment instruction","note":"Eligible earned royalties only. Exceptions are excluded. No cross-currency aggregation.","sql":"SELECT code,name,currency,minimum_cents,advance_cents,earned_cents,guarantee_gap_cents,earned_above_advance_cents,unresolved_sales FROM guarantee_position ORDER BY code"}]},
- {"name":"records","title":"Records review","sections":[{"title":"Policy and contract findings","sql":"SELECT record,rule,finding FROM compliance_findings ORDER BY rule,record"}]}
+  {
+    "name": "week",
+    "title": "Licensing desk this week",
+    "sections": [
+      {
+        "title": "Reporting deadlines",
+        "sql": "SELECT code,agreement,due_on,status,exception_count,currency,earned_cents FROM period_position WHERE closed_at IS NULL ORDER BY due_on"
+      },
+      {
+        "title": "Sales to review",
+        "sql": "SELECT reference,agreement,product,issue FROM sale_review WHERE issue<>'' ORDER BY reference"
+      },
+      {
+        "title": "Follow-ups",
+        "sql": "SELECT a.code,f.note,f.owner,f.due_on FROM followups f JOIN agreements a ON a.id=f.agreement_id WHERE f.closed_at IS NULL ORDER BY f.due_on"
+      }
+    ]
+  },
+  {
+    "name": "agreements",
+    "title": "Licence position",
+    "sections": [
+      {
+        "title": "Whole-term minimum exposure",
+        "note": "Eligible earned royalties only. Exceptions are excluded. No cross-currency aggregation. This is not a payment instruction.",
+        "sql": "SELECT code,name,currency,minimum_cents,earned_cents,guarantee_gap_cents FROM guarantee_position ORDER BY code"
+      },
+      {
+        "title": "Advance comparison and unresolved sales",
+        "note": "Not a recoupment schedule or amount payable. Review the signed contract before settling.",
+        "sql": "SELECT code,currency,advance_cents,earned_above_advance_cents,unresolved_sales FROM guarantee_position ORDER BY code"
+      }
+    ]
+  },
+  {
+    "name": "records",
+    "title": "Records review",
+    "sections": [
+      {
+        "title": "Policy and contract findings",
+        "sql": "SELECT record,rule,finding FROM compliance_findings ORDER BY rule,record"
+      }
+    ]
+  }
 ]
